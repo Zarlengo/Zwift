@@ -60,7 +60,7 @@ export default class Zwift {
 
     };
 
-    addWarmup = (this, id, dictionary) => {
+    addWarmup = (id, dictionary) => {
         // Add warmup string to workout
 
         // Input:
@@ -69,15 +69,19 @@ export default class Zwift {
         // Returns:
         //     Prints error string if not found
         
-        warmup_object = dictionary[id]
-        if warmup_object == "":
-            return print(f"Missing from {'Run' if this.is_run else 'Bike'} warmup: {id}")
-        for cnt, value in enumerate(warmup_object.workout_string):
-            this.warmup_string[cnt] += value
-            this.duration[cnt] -= warmup_object.workout_duration[cnt]
-            if warmup_object.remainder_zones != []:
-                this.remainder_zones = warmup_object.remainder_zones
-
+        warmupObject = dictionary[id];
+        if (warmupObject === '') {
+            return console.log(`Missing from ${this.isRun ? 'Run' : 'Bike'} warmup: ${id}`);
+        }
+        for (cnt = 0; cnt++; cnt < warmup_object.workoutString.length) {
+            this.warmupString[cnt] += warmupObject.workoutString[cnt];
+            this.duration[cnt] -= warmupObject.workoutDuration[cnt];
+            if (warmupObject.remainderZones != []) {
+                this.remainderZones = warmupObject.remainderZones;
+            }
+        }
+    };
+    
     addWorkout = (id, dictionary) => {
         // Add workout string to workout
 
@@ -87,17 +91,20 @@ export default class Zwift {
         // Returns:
         //     Prints error string if not found
 
-        workout_object = dictionary[id]
-        if workout_object == "":
-            return print(f"Missing from {'Run' if this.is_run else 'Bike'} workout: {id}")
-        for cnt, value in enumerate(workout_object.workout_string):
-            this.workout_string[cnt] += value
-            this.duration[cnt] -= workout_object.workout_duration[cnt]
-            if workout_object.remainder_zones != []:
-                this.remainder_zones = workout_object.remainder_zones
+        workoutObject = dictionary[id];
+        if (workoutObject === '') {
+            return console.log(`Missing from ${this.isRun ? 'Run' : 'Bike'} workout: ${id}`);
+        }
+        for (cnt = 0; cnt++; cnt < workout_object.workoutString.length) {
+            this.workout_string[cnt] += workoutObject.workoutString[cnt];
+            this.duration[cnt] -= workoutObject.workoutDuration[cnt];
+            if (workoutObject.remainderZones != []) {
+                this.remainderZones = workoutObject.remainderZones;
+            }
+        }
     };
 
-    addCooldown = (this, id, dictionary) => {
+    addCoolDown = (id, dictionary) => {
         // Add cool down string to workout
 
         // Input:
@@ -111,11 +118,13 @@ export default class Zwift {
             return console.log(`Missing from ${(this.isRun) ? 'Run' : 'Bike'} cool down: ${id}`);
         }
         
-        for cnt, value in enumerate(cooldown_object.workout_string):
-            this.cooldown_string[cnt] += value
-            this.duration[cnt] -= cooldown_object.workout_duration[cnt]
-            if cooldown_object.remainder_zones != []:
-                this.remainder_zones = cooldown_object.remainder_zones
+        for (cnt = 0; cnt++; cnt < coolDownObject.workoutString.length) {
+            this.coolDownString[cnt] += coolDownObject.workoutString[cnt];
+            this.duration[cnt] -= coolDownObject.workoutDuration[cnt];
+            if (coolDownObject.remainderZones != []) {
+                this.remainderZones = coolDownObject.remainderZones;
+            }
+        }
     };
 
     set header(header) {
@@ -134,8 +143,8 @@ export default class Zwift {
         this.description = description;
     };
     
-    set filename(filename) {
-        this.filename = filename;
+    set fileName(fileName) {
+        this.fileName = fileName;
     };
     
     set category(category) {

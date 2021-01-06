@@ -1,5 +1,5 @@
-import Workout from './Zwift';
-import PowerLevels from './Zwift';
+import Workout from './Workout';
+import PowerLevels from './PowerLevels';
 
 export default (test_distance, test_time) => {
 
