@@ -101,9 +101,9 @@ module.exports = class PowerLevels {
         if (duration <= 0) {
             return '';
         }
-        returnString = '';
+        let returnString = '';
         if (Array.isArray(zones)) {
-            distance = this.gdt(duration, zones.reduce((sum, value) => sum + value) / zones.length);
+            const distance = this.gdt(duration, zones.reduce((sum, value) => sum + value) / zones.length);
             zones.forEach(zone => {
                 returnString += `<SteadyState Duration='${Math.floor(distance / zones.length)}' Power='${zone}' pace='3' />\n`;
             });
@@ -123,7 +123,7 @@ module.exports = class PowerLevels {
         if (duration <= 0) {
             return '';
         }
-        returnString = '';
+        let returnString = '';
         if (Array.isArray(zones)) {
             zones.forEach(zone => {
                 returnString += `<SteadyState Duration='${Math.floor(duration / zones.length)}' Power='${zone}'/>\n`;

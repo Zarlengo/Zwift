@@ -1,11 +1,11 @@
-export default class Workout {
+module.exports = class Workout {
     // Inputs:
     //     [0] Workout String
     //     [1] Workout Duration in seconds
     //     [2] Optional: Remainder zone(s) at an item or in list form []
     //     [3] Optional: A complete workout as 'True'
 
-    constructor(text, duration, remainderZones = [], completeWorkout = False) {
+    constructor(text, duration, remainderZones = [], completeWorkout = false) {
         this.completeWorkout = completeWorkout;
         if (Array.isArray(text)) {
             this.text = text;

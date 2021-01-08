@@ -1,14 +1,20 @@
-fs = require('fs');
-
-export default class Zwift {
+module.exports = class Zwift {
     // Input:
     //     [0] Workout duration in "hh:mm:ss" or "mm:ss"
     //     [1] Optional: 'True' if is run
     //     [2] Optional: 'True' if this is a level 1, level 2, level 3 plan
+    fs = require('fs');
+    #header = "";
+    #footer = "";
+    #saveName = "";
+    #description = "";
+    #category = "";
+    #folderLocation = "";
+    #zwoExtension = "";
+    #fileName = "";
 
-    constructor(testDistance, testTime, duration, isRun = false, isLevel = false) {
-        this.testDistance = testDistance;
-        this.testTime = testTime;
+    constructor(power, duration, isRun = false, isLevel = false) {
+        this.power = power;
         this.isRun = isRun;
         this.isLevel = isLevel;    // If it is a level 1, level 2, & level 3 plan type
 
@@ -17,14 +23,6 @@ export default class Zwift {
         this.workoutString = [];
         this.warmUpString = [];
         this.coolDownString = [];
-        this.header = "";
-        this.footer = "";
-        this.saveName = "";
-        this.description = "";
-        this.category = "";
-        this.folderLocation = "";
-        this.zwoExtension = "";
-        this.fileName = "";
 
         const convertString2Seconds = (durationString) => {
             try {
@@ -54,7 +52,7 @@ export default class Zwift {
             this.duration = duration.map(x => convertString2Seconds(x));
         }
 
-        if (len(this.duration) === 1) {
+        if (this.duration.length === 1) {
             this.duration = this.duration * 3
         }
 
@@ -73,7 +71,7 @@ export default class Zwift {
         if (warmupObject === '') {
             return console.log(`Missing from ${this.isRun ? 'Run' : 'Bike'} warmup: ${id}`);
         }
-        for (cnt = 0; cnt++; cnt < warmup_object.workoutString.length) {
+        for (cnt = 0; cnt++; cnt < warmupObject.workoutString.length) {
             this.warmupString[cnt] += warmupObject.workoutString[cnt];
             this.duration[cnt] -= warmupObject.workoutDuration[cnt];
             if (warmupObject.remainderZones != []) {
@@ -95,8 +93,8 @@ export default class Zwift {
         if (workoutObject === '') {
             return console.log(`Missing from ${this.isRun ? 'Run' : 'Bike'} workout: ${id}`);
         }
-        for (cnt = 0; cnt++; cnt < workout_object.workoutString.length) {
-            this.workout_string[cnt] += workoutObject.workoutString[cnt];
+        for (cnt = 0; cnt++; cnt < workoutObject.workoutString.length) {
+            this.workoutString[cnt] += workoutObject.workoutString[cnt];
             this.duration[cnt] -= workoutObject.workoutDuration[cnt];
             if (workoutObject.remainderZones != []) {
                 this.remainderZones = workoutObject.remainderZones;
@@ -128,66 +126,98 @@ export default class Zwift {
     };
 
     set header(header) {
-        this.header = header;
+        this.#header = header;
+    };
+
+    get header() {
+        return this.#header;
     };
 
     set footer(footer) {
-        this.footer = footer;
+        this.#footer = footer;
+    };
+
+    get footer() {
+        return this.#footer;
     };
 
     set saveName(saveName) {
-        this.saveName = saveName;
+        this.#saveName = saveName;
+    };
+
+    get saveName() {
+        return this.#saveName;
     };
     
     set description(description) {
-        this.description = description;
+        this.#description = description;
+    };
+    
+    get description() {
+        return this.#description;
     };
     
     set fileName(fileName) {
-        this.fileName = fileName;
+        this.#fileName = fileName;
+    };
+    
+    get fileName() {
+        return this.#fileName;
     };
     
     set category(category) {
-        this.category = category;
+        this.#category = category;
+    };
+    
+    get category() {
+        return this.#category;
     };
     
     set folderLocation(folderLocation) {
-        this.folderLocation = folderLocation;
+        this.#folderLocation = folderLocation;
+    };
+    
+    get folderLocation() {
+        return this.#folderLocation;
     };
 
     set zwoExtension(zwoExtension) {
-        this.zwoExtension = zwoExtension;
+        this.#zwoExtension = zwoExtension;
+    };
+
+    get zwoExtension() {
+        return this.#zwoExtension;
     };
     
     get __str__() {
         const getWorkout = (cnt) => {
-            return_string  = `<workout>\n${this.warmup_string[cnt]}\n`;
-            return_string += `${this.workout_string[cnt]}\n`;
-            power = PowerLevels(test_distance, test_time);
-            if (this.remainder_zones != []){
+            returnString  = `<workout>\n${this.warmupString[cnt]}\n`;
+            returnString += `${this.workoutString[cnt]}\n`;
+            if (this.remainderZones != []){
                 if (this.isRun) {
-                    return_string += power.getRunRemainder(this.duration[cnt], this.remainder_zones);
+                    returnString += this.power.getRunRemainder(this.duration[cnt], this.remainderZones);
                 } else {
-                    return_string += power.getBikeRemainder(this.duration[cnt], this.remainder_zones);
+                    returnString += this.power.getBikeRemainder(this.duration[cnt], this.remainderZones);
                 }
             }
-            return_string += `${this.cooldown_string[cnt]}\n`;
-            return return_string;
+            returnString += `${this.cooldownString[cnt]}\n`;
+            return returnString;
         };
 
-        beginString = this.header;
+        let beginString = this.header;
         beginString += this.saveName;
         beginString += this.description;
-        categoryString = [];
+        const categoryString = [];
+        let maxLevel;
         if (this.isLevel) {
             maxLevel = 3;
         } else {
             maxLevel = 1;
         }
 
-        level = ""
+        let level = ""
         for (cnt = 0; cnt ++; cnt < maxLevel) {
-            if (this.is_level) {
+            if (this.isLevel) {
                 level = ` Level ${cnt + 1} `;
             }
             categoryString.push( `<WorkoutPlan>${this.filename}${level}</WorkoutPlan>\n
@@ -198,7 +228,7 @@ export default class Zwift {
     };
     
     makeFile = () => {
-        textArray = this.__str__;
+        const textArray = this.__str__;
         for (cnt = 0; cnt++; cnt < textArray.length) {
             level = "";
             if (this.isLevel) {

@@ -1,12 +1,5 @@
-import Workout from './Workout';
-import PowerLevels from './PowerLevels';
-
-export default (test_distance, test_time) => {
-    
-    power = PowerLevels(test_distance, test_time)
-    
-    levels = {};
-    
+module.exports = (Workout, power) => {    
+    levels = {};    
 
     // "146ec384-1a42-4d29-afb9-830e9905e8ec"
     levels.bike["2020 Half Run Focused Plan (All Levels) 12 weeks_7_Bike"] = Workout([
