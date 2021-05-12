@@ -239,9 +239,7 @@ ${this.category}`);
             }
             let fn = `${this.fileName}${level}${this.zwoExtension}`;
             console.log(`${this.folderLocation}${fn}`);
-
-            let utf16buffer = Buffer.from(`\ufeff${textArray[cnt]}`, 'utf16le');
-            fs.writeFileSync(`${this.folderLocation}${fn}`, utf16buffer);
+            fs.writeFileSync(`${this.folderLocation}${fn}`, textArray[cnt]);
         };
     };
 };
