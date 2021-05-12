@@ -1,7 +1,8 @@
 module.exports = (Workout, power) => {
-    warmUp = {};
-    warmUp.bike = {};
-    warmUp.run = {};
+    warmUp = {
+        bike: {},
+        run: {},
+    };
 
     warmUp.bike["WU: 5-10', THEN 3 X 1' (1') @ ZONE 4, TO OPEN UP YOUR LEGS"] = new Workout(
         `<Warmup Duration='540' PowerLow='${power.bikeZone0}' PowerHigh='${power.bikeZone3}'/>\n

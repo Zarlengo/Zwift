@@ -38,6 +38,7 @@ module.exports = class PowerLevels {
         this.bikeZone0 =  0.25;
         this.bikeZone1 =  0.65;
         this.bikeZone2 =  0.72;
+        this.bikeZone2_5 =  0.77;
         this.bikeZone3 =  0.82;
         this.bikeZone4 =  1.00;
         this.bikeZone5 =  1.15;
