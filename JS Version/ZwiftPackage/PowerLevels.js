@@ -42,6 +42,8 @@ module.exports = class PowerLevels {
         this.bikeZone3 =  0.82;
         this.bikeZone4 =  1.00;
         this.bikeZone5 =  1.15;
+        this.bikeZone6 =  1.30;
+        this.bikeZone7 =  1.55;
     
         this.mileTime = runTimeSeconds / (testDistance / this.metersFromMiles)
 

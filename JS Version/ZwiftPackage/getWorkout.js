@@ -1,9 +1,11 @@
 module.exports = (originalTXT, swimBikeRun, isLevel, EN, levelString) => {
     const trimString = require('./trimString');
     const Zwift = require('./Zwift');
+    const splitWorkout = require('./splitWorkout');
     let workoutTXT = originalTXT.toUpperCase();
     let exitLoop = false;
     
+    // console.log(swimBikeRun)
     if (!["Run", "Bike"].includes(swimBikeRun) && workoutTXT != '') {
         return false
     }
@@ -11,6 +13,7 @@ module.exports = (originalTXT, swimBikeRun, isLevel, EN, levelString) => {
     let isRun;
     if (swimBikeRun === 'Run') {
         isRun = true
+return false;
     } else {
         isRun = false
     }
@@ -22,8 +25,6 @@ module.exports = (originalTXT, swimBikeRun, isLevel, EN, levelString) => {
         workoutObject.addWorkout(levelString, EN.levels[swimBikeRun.toLowerCase()])
         return workoutObject
     }
-    console.log('not found', originalTXT)
-    return false;
 
     // # ********** LEVEL NEED TO GET DURATION OUT OF IT *******
     let durationStr;
@@ -42,12 +43,12 @@ module.exports = (originalTXT, swimBikeRun, isLevel, EN, levelString) => {
         workoutTXT = trimString(workoutTXT.slice(workoutTXT.indexOf( '\n' )));
     }
 
-    if (durationStr.includes(':')) {
-        workoutObject = new Zwift(power, [durationStr], isRun, isLevel);
-    } else {
+    // if (durationStr.includes(':')) {
+    //     workoutObject = new Zwift(power, [durationStr], isRun, isLevel);
+    // } else {
         workoutObject = new Zwift(power, ["0:00:00"], isRun, isLevel)
-        console.log(`MILES ONLY? ${swimBikeRun}\n${workoutTXT}`);
-    }
+    //     console.log(`MILES ONLY? ${swimBikeRun}\n${workoutTXT}`);
+    // }
 
 
     //  else if (isLevel) {
@@ -94,7 +95,7 @@ module.exports = (originalTXT, swimBikeRun, isLevel, EN, levelString) => {
 
 
     // leftArr = ["CHOOSE YOUR ABILITY LEVEL:", "INDOOR SWEAT TEST", "ALL ABILITY LEVELS:"]
-    // for (cnt = 0; cnt++; cnt < leftArr.length) {
+    // for (cnt = 0; cnt < leftArr.length; cnt++) {
     //     if (workoutTXT.includes(leftArr[cnt])) {
     //         workoutTXT = workoutTXT.slice(workoutTXT.indexOf(leftArr[cnt]));
     //         workoutTXT = trimString(workoutTXT.slice(workoutTXT.indexOf( '\n' ) + 1));
@@ -112,12 +113,14 @@ module.exports = (originalTXT, swimBikeRun, isLevel, EN, levelString) => {
     // }
 
     // Collection of *NOTES* at the end of the workout
-    rightArr = ["COACH NOTE", "WARM DOWN: AS NEEDED.", "GOAL IS TO BE STEADY HERE, NOT FLASHY", "SWEAT TEST:"]
-    for (cnt = 0; cnt < rightArr.length; cnt++) {
-        if (workoutTXT.includes(rightArr[cnt])) {
-            workoutTXT = trimString(workoutTXT.slice(0, workoutTXT.indexOf(rightArr[cnt])));
+
+
+    rightArr = ["COACH NOTES:", "WARM DOWN: AS NEEDED.", "GOAL IS TO BE STEADY HERE, NOT FLASHY", "SWEAT TEST:", "YOU CAN DO THIS IN ZWIFT BY SIMPLY PICKING A SPRINT"]
+    rightArr.forEach(element => {
+        if (workoutTXT.includes(element)) {
+            workoutTXT = trimString(workoutTXT.slice(0, workoutTXT.indexOf(element)));
         }
-    }
+    });
     
     if (workoutTXT.length <= 1) {
         return false;
@@ -125,7 +128,7 @@ module.exports = (originalTXT, swimBikeRun, isLevel, EN, levelString) => {
 
     // # Exit scenarios, don't make a workout
     singleArr = ["HR TEST", "DO NOT DO BOTH TESTS!", "HR ATHELTES DO THIS WORKOUT"]
-    for (cnt = 0; cnt++; cnt < singleArr.length) {
+    for (cnt = 0; cnt < singleArr.length; cnt++) {
         if (workoutTXT.includes(singleArr[cnt])) {
             return false;
         }
@@ -152,13 +155,20 @@ module.exports = (originalTXT, swimBikeRun, isLevel, EN, levelString) => {
     }
 
 
-
+    [WUString, workoutTXT, CDString] = splitWorkout(workoutTXT);
+    workoutObject.addWarmup(WUString, WUDictionary);
+    workoutObject.addCoolDown(CDString, CDDictionary);
+    workoutObject.addWorkout(workoutTXT, MSDictionary);
+    // console.log({WUString, workoutTXT, CDString}); 
+    
+    // console.log('not found\n')//, {swimBikeRun, originalTXT})
+    return workoutObject;
 
     // console.log({workoutTXT, workoutObject});
 
     WUString = ""
     WUArr = ["WU:", "WARM UP"]
-    for (cnt = 0; cnt++; cnt < WUArr.length) {
+    for (cnt = 0; cnt < WUArr.length; cnt++) {
         // # print(workoutTXT)
         itemCnt = Math.floor((workoutTXT.length - workoutTXT.replace(WUArr[cnt], "").length) / WUArr[cnt].length)
         if (itemCnt === 1){
@@ -167,19 +177,21 @@ module.exports = (originalTXT, swimBikeRun, isLevel, EN, levelString) => {
             WUString = WUString.split(".")[0]
             workoutTXT = trimString(workoutTXT.slice(WUString.length))
             WUString = trimString(WUString)
+            console.log({WUString})
             workoutObject.addWarmup(WUString, WUDictionary)
         }
     }
     CDString = ""
     CDArr = ["CD:", "WD:", "WARM DOWN:", "REMAINDER OF", "REMAINDER AS"]
-    for (cnt = 0; cnt++; cnt < CDArr.length) {
-        itemCnt = Math.floor((workoutTXT.length - len(workoutTXT.replace(CDArr[cnt], ""))) / CDArr[cnt].length)
+    for (cnt = 0; cnt < CDArr.length; cnt++) {
+        itemCnt = Math.floor((workoutTXT.length - workoutTXT.replace(CDArr[cnt], "").length) / CDArr[cnt].length)
         if (itemCnt == 1) {
             CDString = workoutTXT.slice(workoutTXT.indexOf(CDArr[cnt]))
             workoutTXT = trimString(workoutTXT.slice(0, workoutTXT.indexOf(CDString) - 1))
             CDString = CDString.split( String.fromCharCode(13))[0]
             CDString = CDString.split(".")[0]
             workoutObject.addCooldown(CDString, CDDictionary)
+            console.log({CDString})
         }
     }
 

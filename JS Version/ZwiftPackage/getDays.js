@@ -27,7 +27,6 @@ module.exports = (weekDaySTR, dayText, fileLocation, fileName, folderName, isLev
                 if (eventType != "" && eventTitle != "Other") {
                     workoutObject = getWorkout(daysEvent, eventType, isLevel, EN, `${folderName}_${dayNum}`);
                     if (workoutObject != false) {
-                        console.log('enter wo')
                         workoutObject.header = `${headerString}Day ${weekdayNum} ${eventTitle}</name>\n`;
                         workoutObject.footer = footerString;
                         workoutObject.saveName = `<activitySaveName>Zwift - EN ${fileName} Day ${dayNum} ${eventType}</activitySaveName>\n`;
@@ -39,8 +38,8 @@ module.exports = (weekDaySTR, dayText, fileLocation, fileName, folderName, isLev
                         workoutObject.description = `<description>${fileName}\nPlan Day #${dayNum}\n${eventTitle}\n${trimString(daysEvent)}${runString}</description>\n`;
                         workoutObject.fileName = fileName;
                         workoutObject.category = `<categoryIndex>0</categoryIndex>
-<subcategory>Week ${('00' + str(weekNum)).slice(-2)}</subcategory>
-<sportType>${eventType.lower()}</sportType>
+<subcategory>Week ${('00' + weekNum.toString()).slice(-2)}</subcategory>
+<sportType>${eventType.toLowerCase()}</sportType>
 <tags>${eventTitle}</tags>\n`;
 
                         workoutObject.folderLocation = fileLocation;

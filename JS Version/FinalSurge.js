@@ -10,7 +10,7 @@ outputFileLocation = '../ZWO Files/';
 testMode = false;
 
 // Only run this single file only, comment to do all
-overrideFile = 'd2d76305-e16e-46da-8855-deb67ac07193';
+overrideFile = '94a5a516-bd0a-471e-9926-cb7c68aad36a';
 
 // ****************
 const fs = require('fs');
@@ -25,7 +25,7 @@ const searchForTXTFiles = (fFolder) => {
     fs.readdirSync(fFolder).forEach(file => {
         fileName = file.split('.')[0];
         if (file.includes('.txt')) {
-            fileString = fs.readFileSync(`${fFolder}${file}`, 'ucs2');
+            fileString = fs.readFileSync(`${fFolder}${file}`, 'utf8');
 
             if (fileString.includes('Level 1') && fileString.includes('Level 2') && fileString.includes('Level 3')) {
                 isLevel = true;
@@ -39,7 +39,7 @@ const searchForTXTFiles = (fFolder) => {
             fileDictionary[fileName] = {fileString, isLevel};
         }
     });
-    
+
     return fileDictionary
 };
 

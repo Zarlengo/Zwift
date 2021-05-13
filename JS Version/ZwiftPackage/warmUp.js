@@ -9,6 +9,11 @@ module.exports = (Workout, power) => {
         <IntervalsT Repeat='3' OnDuration='60' OffDuration='60' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>`,
         10 * 60)
 
+    warmUp.bike["WARM UP, THEN EVERY 15' OR SO DO A 30\" MAX EFFORT SPRINT / BURST BEFORE RETURNING TO ZONE 1 OR ZONE 2 PACE"] = new Workout(
+        `<Warmup Duration='540' PowerLow='${power.bikeZone0}' PowerHigh='${power.bikeZone3}'/>\n
+        <IntervalsT Repeat='3' OnDuration='60' OffDuration='60' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>\n
+        <IntervalsT Repeat='9' OnDuration='885' OffDuration='15' OnPower='${power.bikeZone2}' OffPower='${power.bikeZone5}'/>`,
+        150 * 60)
 
     warmUp.bike["WU: 15' EASY, INCLUDE 4 X 30'' SPINUPS"] = new Workout(
         `<Warmup Duration='900' PowerLow='${power.bikeZone0}' PowerHigh='${power.bikeZone3}'/>\n

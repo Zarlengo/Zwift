@@ -4,12 +4,13 @@ module.exports = (VarIn) => {
     }
 
     removeString = [
-        String.fromCharCode(10),
-        String.fromCharCode(13),
-        String.fromCharCode(32),
-        '\n',
-        String.fromCharCode(46),
-        String.fromCharCode(59)
+        String.fromCharCode(10), // line feed
+        String.fromCharCode(13), // carriage return
+        String.fromCharCode(32), // space
+        '\n',                    // new line
+        String.fromCharCode(46), // period
+        String.fromCharCode(58), // colon
+        String.fromCharCode(59)  // semi-colon
     ];
     
     while (removeString.includes(VarIn.slice(-1))) {

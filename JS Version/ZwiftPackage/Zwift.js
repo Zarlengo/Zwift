@@ -68,12 +68,16 @@ module.exports = class Zwift {
         // Returns:
         //     Prints error string if not found
         
+        if (id === '') {
+            return
+        }
+
         let warmupObj = dictionary[id];
-        if (warmupObj === '') {
+        if (typeof warmupObj === 'undefined') {
             return console.log(`Missing from ${this.isRun ? 'Run' : 'Bike'} warmup: ${id}`);
         }
         for (let cnt = 0; cnt < warmupObj.text.length; cnt++) {
-            this.warmupString[cnt] += warmupObj.text[cnt];
+            this.warmUpString[cnt] += warmupObj.text[cnt];
             this.duration[cnt] -= warmupObj.duration[cnt];
             if (warmupObj.remainderZones != []) {
                 this.remainderZones = warmupObj.remainderZones;
@@ -89,9 +93,12 @@ module.exports = class Zwift {
         //     [1] dictionary to get workout from
         // Returns:
         //     Prints error string if not found
-
+        if (id === '') {
+            return
+        }
+        
         let workoutObj = dictionary[id];
-        if (workoutObj === '') {
+        if (typeof workoutObj === 'undefined') {
             return console.log(`Missing from ${this.isRun ? 'Run' : 'Bike'} workout: ${id}`);
         }
         for (let cnt = 0; cnt < workoutObj.text.length; cnt++) {
@@ -112,8 +119,12 @@ module.exports = class Zwift {
         // Returns:
         //     Prints error string if not found
         
+        if (id === '') {
+            return
+        }
+        
         let coolDownObj = dictionary[id];
-        if (coolDownObj === '') {
+        if (typeof coolDownObj === 'undefined') {
             return console.log(`Missing from ${(this.isRun) ? 'Run' : 'Bike'} cool down: ${id}`);
         }
         

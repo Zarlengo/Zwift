@@ -213,6 +213,7 @@ module.exports = (Workout, power) => {
         48 * 60)
     bike["2 X 20 (4') @ 95-100%/ZONE4/HARD"] = bike["2 X 20' (4') @ 95-100%/ZONE4/HARD"]
     bike["2 X 20 (4') @ ZONE 4"] = bike["2 X 20' (4') @ 95-100%/ZONE4/HARD"]
+    bike["2 X 20' (4') @ ZONE 4"] = bike["2 X 20' (4') @ 95-100%/ZONE4/HARD"]
     bike["2 X 20' (4') @ 95-100%/ZONE4/HARD.REMAINDER OF TIME AT 80-85%/ZONE3/MOD-HARD"] = new Workout(
         `<IntervalsT Repeat='2' OnDuration='1200' OffDuration='240' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>\n
         <SteadyState Duration='3120' Power='${power.bikeZone3}'/>`,
@@ -225,6 +226,14 @@ module.exports = (Workout, power) => {
         `<IntervalsT Repeat='3' OnDuration='240' OffDuration='240' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>"
         <Cooldown Duration='300' PowerLow='${power.bikeZone2}' PowerHigh='${power.bikeZone0}'/>`,
         29 * 60)
+        
+    bike["3 X 4' (4') RECOVERY @ ZONE 1. SEE COACH NOTES FOR INTENSITY TARGETS"] = new Workout(
+        `<IntervalsT Repeat='3' OnDuration='240' OffDuration='240' OnPower='${power.bikeZone6}' OffPower='${power.bikeZone1}'/>`,
+        24 * 60)
+    bike["3 X 4' (4')...RECOVERY IN ZONE 1. SEE COACH NOTES FOR INTENSITY TARGETS"] = bike["3 X 4' (4') RECOVERY @ ZONE 1. SEE COACH NOTES FOR INTENSITY TARGETS"]
+    bike["3 X 5' WITH 5' OF RECOVERY IN ZONE 1"] = new Workout(
+        `<IntervalsT Repeat='3' OnDuration='300' OffDuration='300' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone1}'/>`,
+        30 * 60)
     bike["3 X 5' (2') @ 95-100%/ZONE4/HARD"] = new Workout(
         `<IntervalsT Repeat='3' OnDuration='300' OffDuration='120' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>`,
         21 * 60)
@@ -271,6 +280,9 @@ module.exports = (Workout, power) => {
         75 * 60, power.bikeZone3)
 
 
+    bike["4 X 3' (3') RECOVERY @ ZONE 1. SEE COACH NOTES FOR INTENSITY TARGETS"] = new Workout(
+        `<IntervalsT Repeat='4' OnDuration='180' OffDuration='180' OnPower='${power.bikeZone6}' OffPower='${power.bikeZone1}'/>`,
+        24 * 60)
     bike["4 X 8' (4') ALL @ ZONE 4, REMAINDER IN ZONE 2"] = new Workout(
         `<IntervalsT Repeat='3' OnDuration='600' OffDuration='300' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>`,
         48 * 60, power.bikeZone2)
@@ -278,6 +290,9 @@ module.exports = (Workout, power) => {
         `<IntervalsT Repeat='4' OnDuration='1500' OffDuration='300' OnPower='${power.bikeZone3}' OffPower='${power.bikeZone0}'/>`,
         20 * 60)
 
+    bike["5 X 1' WITH 7' OF RECOVERY IN ZONE 1. SEE COACH NOTES FOR INTENSITY TARGETS"] = new Workout(
+        `<IntervalsT Repeat='5' OnDuration='60' OffDuration='420' OnPower='${power.bikeZone7}' OffPower='${power.bikeZone1}'/>`,
+        40 * 60)
     bike["5 X 1.5' (1.5') @ ZONE 5"] = new Workout(
         `<IntervalsT Repeat='5' OnDuration='90' OffDuration='90' OnPower='${power.bikeZone5}' OffPower='${power.bikeZone0}'/>`,
         15 * 60)
@@ -294,9 +309,15 @@ module.exports = (Workout, power) => {
     bike["6 X 2'(2') @ ZONE 5"] = new Workout(
         `<IntervalsT Repeat='6' OnDuration='120' OffDuration='120' OnPower='${power.bikeZone5}' OffPower='${power.bikeZone0}'/>`,
         24 * 60)
+    bike["6 X 2' (2') RECOVERY @ ZONE 1. SEE COACH NOTES FOR INTENSITY TARGETS"] = new Workout(
+        `<IntervalsT Repeat='6' OnDuration='120' OffDuration='120' OnPower='${power.bikeZone6}' OffPower='${power.bikeZone1}'/>`,
+        24 * 60)
     bike["6 X 7' (3') ALL @ ZONE 4, REMAINDER IN ZONE 2"] = new Workout(
         `<IntervalsT Repeat='3' OnDuration='600' OffDuration='300' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>`,
         60 * 60, power.bikeZone2)
+    bike["6 X 45 WITH 7' OF RECOVERY IN ZONE 1"] = new Workout(
+        `<IntervalsT Repeat='6' OnDuration='45' OffDuration='420' OnPower='${power.bikeZone7}' OffPower='${power.bikeZone1}'/>`,
+        46.5 * 60)
 
     bike["7 X 1' (1') @ ZONE 5"] = new Workout(
         `<IntervalsT Repeat='7' OnDuration='60' OffDuration='60' OnPower='${power.bikeZone5}' OffPower='${power.bikeZone0}'/>`,
@@ -310,10 +331,19 @@ module.exports = (Workout, power) => {
     bike["7 X 2'(2') @ ZONE 5"] = new Workout(
         `<IntervalsT Repeat='7' OnDuration='120' OffDuration='120' OnPower='${power.bikeZone5}' OffPower='${power.bikeZone0}'/>`,
         28 * 60)
+    bike["7 X 45\" WITH 7' OF RECOVERY IN ZONE 1. SEE COACH NOTES FOR INTENSITY TARGETS"] = new Workout(
+        `<IntervalsT Repeat='7' OnDuration='45' OffDuration='420' OnPower='${power.bikeZone7}' OffPower='${power.bikeZone1}'/>`,
+        54.25 * 60)
 
+    bike["8 X 1.5', RECOVERY @ ZONE 1. SEE COACH NOTES FOR INTENSITY TARGETS"] = new Workout(
+        `<IntervalsT Repeat='8' OnDuration='90' OffDuration='60' OnPower='${power.bikeZone6}' OffPower='${power.bikeZone1}'/>`,
+        20 * 60)
     bike["8' (4') @ ZONE 4"] = new Workout(
         `<IntervalsT Repeat='1' OnDuration='480' OffDuration='240' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>`,
         12 * 60)
+    bike["8 X 30\"\" WITH 7' OF RECOVERY IN ZONE 1"] = new Workout(
+        `<IntervalsT Repeat='8' OnDuration='30' OffDuration='420' OnPower='${power.bikeZone5}' OffPower='${power.bikeZone1}'/>`,
+        60 * 60)
 
     bike["10' (4') @ ZONE 4"] = new Workout(
         `<IntervalsT Repeat='1' OnDuration='600' OffDuration='240' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>`,
@@ -323,6 +353,9 @@ module.exports = (Workout, power) => {
         <IntervalsT Repeat='1' OnDuration='840' OffDuration='300' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>\n
         <IntervalsT Repeat='1' OnDuration='1080' OffDuration='360' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>`,
         57 * 60, power.bikeZone2)
+    bike["10 X 30\" WITH 7' OF RECOVERY IN ZONE 1"] = new Workout(
+        `<IntervalsT Repeat='10' OnDuration='30' OffDuration='420' OnPower='${power.bikeZone7}' OffPower='${power.bikeZone1}'/>`,
+        75 * 60)
 
     bike["12' (4'), 15' (5'), 18' (6') ALL @ ZONE 4, REMAINDER IN ZONE 2"] = new Workout(
         `<IntervalsT Repeat='1' OnDuration='720' OffDuration='240' OnPower='${power.bikeZone4}' OffPower='${power.bikeZone0}'/>\n
@@ -365,7 +398,16 @@ module.exports = (Workout, power) => {
     // # bike["MS: 1' ''ON'' @ 120%/ZONE5/VERY HARD, 1' ''OFF'' @ 60-65%/ZONE1/EASY. REPEAT FOR A TOTAL OF 10' OF ''ON'' TIME, AS WHATEVER COMBINATION OF ON/OFF INTERVALS FEELS RIGHT FOR YOU TODAY"] = bike["MS: 1' ''ON'' @ 120%/ZONE5/VERY HARD, 1' ''OFF'' @ 60-65%/ZONE1/EASY. REPEAT FOR A TOTAL OF 10' OF ''ON'' TIME"]
     // # bike["MS: 1' ''ON'' @ 120%/ZONE5/VERY HARD, 1' ''OFF'' @ 60-65%/ZONE1/EASY. REPEAT FOR A TOTAL OF 14' OF ''ON'' TIME, AS WHATEVER COMBINATION OF ON/OFF INTERVALS FEELS RIGHT FOR YOU TODAY"] = bike["MS: 1' ''ON'' @ 120%/ZONE5/VERY HARD, 1' ''OFF'' @ 60-65%/ZONE1/EASY. REPEAT FOR A TOTAL OF 14' OF ''ON'' TIME"]
 
+    bike["30' OF SUSTAINED EFFORT IN ZONE 3"] = new Workout(
+        `<SteadyState Duration='1800' Power='${power.bikeZone3}'/>`,
+        30 * 60)
 
+
+    bike["RIDE 30' @ ZONE 2, THEN 60' @ ZONE 3 AS MUCH AS POSSIBLE. TAKE SHORT RECOVERIES AS NEEDED (EAT, DRINK, ETC)"] = new Workout(
+        `<SteadyState Duration='1800' Power='${power.bikeZone2}'/>\n
+        <SteadyState Duration='3600' Power='${power.bikeZone3}'/>`,
+        90 * 60)
+        
     bike["RIDE NO MORE THAN 112 MILES OR 6 HOURS, WHICHEVER COMES FIRST"] = new Workout(
         `<SteadyState Duration='21600' Power='${power.bikeZone2}'/>`,
         360 * 60)
